@@ -3,7 +3,7 @@
 
 int main() {
 	const int N = 4;
-	my_stl::threadPool pool(N);
+	my_threadtool::threadPool pool(N);
 	std::vector< std::future<int> > result;
 	for (int i = 0; i < N; i++) {
 		result.emplace_back(

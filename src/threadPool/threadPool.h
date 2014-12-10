@@ -10,7 +10,7 @@
 #include <queue>
 #include <memory>
 
-namespace my_stl {
+namespace my_threadtool {
 	class threadPool {
 	public:
 		threadPool(const int& size);
@@ -52,7 +52,7 @@ namespace my_stl {
 	{
 		using return_type = typename std::result_of<F(Args...)>::type;
 		auto task = std::make_shared< std::packaged_task< return_type()> >(
-			std::bind(f, args...));
+			std::bind(std::forward<F>(f), std::forward<Args>(args)...));
 		//std::packaged_task< return_type() > task(std::bind(f, args...));
 		std::future<return_type> ret = task->get_future();
 		{
