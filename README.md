@@ -1,4 +1,4 @@
-###**Some multithread-relevance classes or frame(most are imitated from java) implemented in C++**
+###**Some concurrent classes and frames(most are imitated from java) implemented in C++**
 
 ####Will be implemented:
 * ####BlockingQueue
@@ -10,9 +10,9 @@
 * ####Phaser
 * ####Exchanger
 
-####Some have already been implemented:
+####Have already been implemented:
 * ####[threadPool](https://github.com/choleraehyq/my_threadtool/tree/master/src/threadPool)
 
-####Some maybe implemented:
+####Maybe implemented:
 * ####ForkJoinPol
 * ####ForkJoinTask
