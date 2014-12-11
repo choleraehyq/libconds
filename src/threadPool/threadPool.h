@@ -10,10 +10,11 @@
 #include <queue>
 #include <memory>
 
-namespace my_threadtool {
+namespace my_tt {
 	class threadPool {
 	public:
 		threadPool(const int& size);
+		threadPool(const threadPool &t) = delete;
 		template<typename F, typename... Args>
 		auto enqueue(F &&f, Args&&... args)
 			->std::future<typename std::result_of<F(Args...)>::type>;
