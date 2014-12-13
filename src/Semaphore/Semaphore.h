@@ -5,27 +5,33 @@
 #include <mutex>
 
 namespace my_tt {
-	class semaphore {
-		friend void p(semaphore &sem);
-		friend void v(semaphore &sem);
+	class Semaphore {
+		friend void p(Semaphore &sem);
+		friend void v(Semaphore &sem);
 	public:
-		semaphore() :num(0) {}
-		semaphore(const int &x) :num(x) {}
-		semaphore(const semaphore &) = delete;
+		Semaphore() :num(0) {}
+		Semaphore(const int &x) :num(x) {}
+		Semaphore(const Semaphore &) = delete;
+		Semaphore &operator=(const Semaphore &) = delete;
+		~Semaphore();
 	private:
 		std::mutex mtx;
 		std::condition_variable cv;
 		int num;
 	};
-	void v(semaphore &sem) {
+	void v(Semaphore &sem) {
 		std::unique_lock<std::mutex> lock(sem.mtx);
 		sem.num++;
 		sem.cv.notify_one();
 	}
-	void p(semaphore &sem) {
+	void p(Semaphore &sem) {
 		std::unique_lock<std::mutex> lock(sem.mtx);
 		sem.num--;
 		sem.cv.wait(lock, [&sem] { return sem.num >= 0; });
+	}
+	Semaphore::~Semaphore() {
+		this->num = 1;
+		this->cv.notify_all();
 	}
 }
 

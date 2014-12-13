@@ -15,6 +15,7 @@ namespace my_tt {
 	public:
 		threadPool(const int& size);
 		threadPool(const threadPool &t) = delete;
+		threadPool &operator=(const threadPool &) = delete;
 		template<typename F, typename... Args>
 		auto enqueue(F &&f, Args&&... args)
 			->std::future<typename std::result_of<F(Args...)>::type>;

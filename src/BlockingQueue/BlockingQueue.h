@@ -17,6 +17,7 @@ namespace my_tt {
 		BlockingQueue(const int &n, items_type x);
 		BlockingQueue(std::initializer_list<items_type> lst);
 		BlockingQueue(const BlockingQueue &q) = delete;
+		BlockingQueue &operator=(const BlockingQueue &) = delete;
 		int size();
 		bool empty();
 		void add(items_type item);

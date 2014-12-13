@@ -11,8 +11,10 @@ namespace my_tt {
 	public:
 		Exchanger() :hasExchanged(true) {}
 		Exchanger(const Exchanger<T> &) = delete;
+		Exchanger &operator=(const Exchanger<T> &) = delete;
 		//hasExchanged will be spined first in Exchanger::exchange
 		T exchange(const T& swapItem);
+		~Exchanger() = default;
 	private:
 		bool hasExchanged;
 		T temp1, temp2;

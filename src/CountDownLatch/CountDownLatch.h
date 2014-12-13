@@ -16,7 +16,7 @@ namespace my_tt {
 		CountDownLatch(int num)
 			:target(num), nwaiting(0) {}
 		CountDownLatch(const CountDownLatch &) = delete;
-		CountDownLatch(CountDownLatch &&);
+		CountDownLatch &operator=(const CountDownLatch &) = delete;
 		//I will implement it later after i completely understand rvalue.
 	private:
 		std::condition_variable cv;
