@@ -9,28 +9,32 @@ namespace my_tt {
 	template<typename T>
 	class Exchanger {
 	public:
-		Exchanger() :hasExchanged(true), temp1(nullptr), temp2(nullptr) {}
+		Exchanger() :hasExchanged(true) {}
+		Exchanger(const Exchanger<T> &) = delete;
 		//hasExchanged will be spined first in Exchanger::exchange
-		T exchange(T& swapItem);
+		T exchange(const T& swapItem);
 	private:
 		bool hasExchanged;
-		std::shared_ptr<T> temp1, temp2;
+		T temp1, temp2;
 		std::mutex mtx;
 		std::condition_variable cv;
 	};
 	template<typename T>
-	T Exchange<T>::exchange(T& swapItem) {
+	T Exchanger<T>::exchange(const T& swapItem) {
 		std::unique_lock<std::mutex> lock(this->mtx);
+		T ret;
 		this->hasExchanged = !this->hasExchanged;
-		if ( this->hasExchanged ) {
-			this->temp1 = std::make_shared<T>(swapItem);
-			this->cv.wait(lock, [this] { return !this->hasExchanged; });
+		if ( !this->hasExchanged ) {
+			this->temp1 = std::move(swapItem);
+			this->cv.wait(lock, [this] { return this->hasExchanged; });
+			ret = std::move(temp2);
 		}
 		else {
-			this->temp2 = std::make_shared<T>(swapItem);
-			//this->cv.notify_one();
-			//Please review the lock and condition_variable first tomorrow.
+			this->temp2 = std::move(swapItem);
+			this->cv.notify_one();
+			ret = std::move(temp1);
 		}
+		return ret;
 	}
 }
 #endif
