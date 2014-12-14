@@ -22,7 +22,7 @@ namespace my_tt {
 		std::condition_variable cv;
 		std::mutex mtx;
 		int target;
-		int nwaiting;
+		volatile int nwaiting;
 	};
 	int CountDownLatch::getParties() {
 		return this->nwaiting;
