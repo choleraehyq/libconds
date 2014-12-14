@@ -7,7 +7,7 @@
 #include <future>
 
 namespace my_tt {
-	template <typename F&&, typename... Args&&>
+	template <typename F, typename... Args>
 	class Barrier {
 	public:
 		Barrier(int n, F&& f, Args&&... args)
