@@ -4,11 +4,12 @@
 #include <mutex>
 #include <condition_variable>
 #include <functional>
+#include <future>
 
 namespace my_tt {
+	template <typename F&&, typename... Args&&>
 	class Barrier {
 	public:
-		template <typename F&&, typename... Args&&>
 		Barrier(int n, F&& f, Args&&... args)
 			:target(n), func(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
 		Barrier() = delete;
@@ -16,17 +17,26 @@ namespace my_tt {
 		Barrier &operator=(const Barrier &) = delete;
 		void await();
 		int getParties();
+		auto get_future()->std::future<std::result_of<F(Args...)>::type>;
 	private:
 		int target;
 		volatile int nwaiting;
 		std::mutex mtx;
 		std::condition_variable cv;
-		std::function<void()> func;
+		std::packaged_task<std::result_of<F(Args...)>::type> func;
 	};
-	int Barrier::getParties() {
+	template <typename F&&, typename... Args&&>
+	int Barrier<F&&, Args&&...>::getParties() {
 		return this->nwaiting;
 	}
-	void Barrier::await() {
+	template <typename F&&, typename... Args&&>
+	auto Barrier<F&&, Args&&...>::get_future
+		->std::future < std::result_of<F(Args...)>::type >
+	{
+		return this->func.get_future();
+	}
+	template <typename F&&, typename... Args&&>
+	void Barrier<F&&, Args&&...>::await() {
 		std::unique_lock<std::mutex> lock(this->mtx);
 		this->nwaiting++;
 		if ( this->nwaiting == this->target ) {

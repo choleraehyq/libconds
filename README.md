@@ -1,8 +1,7 @@
 ###**Some concurrent classes and frames(most are imitated from java) implemented in C++**
 
 ####Will be implemented:
-* **CyclicBarrier**
-* **Phaser**
+* **Barrier**
 
 ####Have already been implemented:
 * **[threadPool](https://github.com/choleraehyq/my_threadtool/tree/master/src/threadPool)**
@@ -14,3 +13,4 @@
 ####Planning to implement in the long future:
 * **ForkJoinPool**
 * **ForkJoinTask**
+* **[LockfreeQueue](https://github.com/choleraehyq/my_threadtool/tree/master/src/LockfreeQueue)**
