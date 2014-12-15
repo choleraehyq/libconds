@@ -69,4 +69,5 @@ namespace my_tt {
 		return p->next->value;
 	}
 }
+
 #endif
