@@ -1,7 +1,8 @@
-###**Some concurrent classes and frames(most are imitated from java) implemented in C++**
+###**Some synchronized classes implemented in C++**
 
 ####Will be implemented:
 * **[Barrier](https://github.com/choleraehyq/my_threadtool/tree/master/src/Barrier)**
+* **[ReadWriteLock](https://github.com/choleraehyq/my_threadtool/tree/master/src/ReadWriteLock)**
 
 ####Have already been implemented:
 * **[threadPool](https://github.com/choleraehyq/my_threadtool/tree/master/src/threadPool)**
@@ -9,8 +10,7 @@
 * **[Semaphore](https://github.com/choleraehyq/my_threadtool/tree/master/src/Semaphore)**
 * **[CountDownLatch](https://github.com/choleraehyq/my_threadtool/tree/master/src/CountDownLatch)**
 * **[Exchanger](https://github.com/choleraehyq/my_threadtool/tree/master/src/Exchanger)**
+* **[Spinlock](https://github.com/choleraehyq/my_threadtool/tree/master/src/Spinlock)**
 
 ####Planning to implement in the long future:
-* **ForkJoinPool**
-* **ForkJoinTask**
 * **[LockfreeQueue](https://github.com/choleraehyq/my_threadtool/tree/master/src/LockfreeQueue)**
