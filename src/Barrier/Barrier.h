@@ -18,6 +18,7 @@ namespace my_tt {
 		void await();
 		int getParties();
 		auto get_future()->std::future<std::result_of<F(Args...)>::type>;
+		~Barrier() = default;
 	private:
 		int target;
 		volatile int nwaiting;
@@ -43,7 +44,7 @@ namespace my_tt {
 			cv.notify_all();
 			this->func();
 		}
-		else 
+		else
 			this->cv.wait(lock, [this] { return this->nwaiting == this->target; });
 	}
 }
