@@ -19,9 +19,14 @@ void hehewrite() {
 }
 
 int main() {
-    std::thread r1(heheread);
-    std::thread r2(heheread);
     std::thread w1(hehewrite);
     std::thread w2(hehewrite);
+	std::thread r1(heheread);
+	std::thread r2(heheread);
+	r1.join();
+	r2.join();
+	w1.join();
+	w2.join();
+	system("pause");
     return 0;
 }
