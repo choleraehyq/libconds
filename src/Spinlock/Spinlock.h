@@ -5,7 +5,7 @@
 namespace my_tt {
 	class Spinlock {
 	public:
-		Spinlock() :flag(ATOMIC_FLAG_INIT);
+		Spinlock()  = default;
 		//Spinlock() :flag(ATOMIC_FLAG_INIT) {}
 		Spinlock(const Spinlock &) = delete;
 		Spinlock &operator=(const Spinlock &) = delete;
@@ -13,7 +13,7 @@ namespace my_tt {
 		void unlock();
 		~Spinlock() = default;
 	private:
-		std::atomic_flag flag;
+		std::atomic_flag flag = ATOMIC_FLAG_INIT;
 	};
 	void Spinlock::lock() {
 		while ( this->flag.test_and_set(std::memory_order_acquire) )
