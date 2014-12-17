@@ -1,8 +1,5 @@
 ###**Some synchronized classes implemented in C++**
 
-####Will be implemented:
-* **[Barrier](https://github.com/choleraehyq/my_threadtool/tree/master/src/Barrier)**
-
 ####Have already been implemented:
 * **[threadPool](https://github.com/choleraehyq/my_threadtool/tree/master/src/threadPool)**
 * **[BlockingQueue](https://github.com/choleraehyq/my_threadtool/tree/master/src/BlockingQueue)**
@@ -14,3 +11,5 @@
 
 ####Planning to implement in the long future:
 * **[LockfreeQueue](https://github.com/choleraehyq/my_threadtool/tree/master/src/LockfreeQueue)**
+* **[Barrier](https://github.com/choleraehyq/my_threadtool/tree/master/src/Barrier)**
+
